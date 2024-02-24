@@ -40,6 +40,27 @@
         // 데이터베이스에 저장될 학생 데이터 배열
         let students = [];
 
+        // 다시 하기 버튼 생성
+        const restartButton = document.createElement('button');
+                restartButton.textContent = '다시 하기';
+                restartButton.style.display = 'none'; // 초기에는 숨겨둠
+                document.body.appendChild(restartButton);
+
+        // 다시 하기 버튼 클릭 시 이벤트 처리
+        restartButton.addEventListener('click', () => {
+                // 카드 맞추기 활동 관련 요소들 초기화
+                currentCardIndex = 0;
+                reviewScreen.innerHTML = ''; // 리뷰 화면 초기화
+                shuffleCards(); // 카드 다시 섞기
+                showTotalCardsNumber(); // 총 카드 수 다시 표시
+                showCard(); // 카드 맞추기 활동 다시 시작
+                restartButton.style.display = 'none'; // "다시 하기" 버튼 숨기기
+            });
+        // 모든 맞추기 활동이 끝날 때 "다시 하기" 버튼을 표시하는 함수
+        function showRestartButton() {
+                    restartButton.style.display = 'block';
+                }
+
         // "csv 파일로 카드 추가하기" 버튼 클릭 시 이벤트 처리
         document.getElementById('uploadCSVButton').addEventListener('click', () => {
             csvFileInput.click(); // CSV 파일 업로드 버튼 클릭 시 파일 입력(input) 요소 클릭
@@ -123,6 +144,7 @@
                 currentCardIndex++;
             } else {
                 alert('모든 맞추기 활동이 끝났습니다!'); // 모든 카드를 다 본 경우 알림
+                showRestartButton();
             }
         }
 
@@ -163,19 +185,6 @@
             addStudentForm.reset(); // 폼 초기화
             addStudentForm.style.display = 'none';
         });
-
-        // 초기 카드 생성
-        function createCard(card) {
-            // 코드 생략
-        }
-
-        // 초기 카드 생성
-        const initialCards = [
-            { number: 1, name: "학생1", difficulty: false },
-            { number: 2, name: "학생2", difficulty: true },
-            // 추가적인 초기 카드가 있다면 여기에 추가하세요
-        ];
-        initialCards.forEach(card => createCard(card));
     </script>
 </body>
 </html>
