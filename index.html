@@ -22,13 +22,28 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh; /* 브라우저의 높이를 차지하도록 설정 */
+        height: 100vh;
+        height: calc(var(--vh, 1vh) * 100); /* 브라우저의 높이를 차지하도록 설정 */
         }
         .card-counter {
         position: fixed;
         bottom: 10px; /* 화면 하단으로부터의 간격 조절 */
         left: 50%;
         transform: translateX(-50%);
+        }
+        .difficulty-buttons {
+        position: fixed;
+        bottom: 10px; /* 화면 하단으로부터의 간격 조절 */
+        left: 50%;
+        transform: translateX(-50%);
+        }
+        .restartButton {
+        position: fixed; /* 화면의 고정 위치에 배치 */
+        top: 50%; /* 화면 상단으로부터 50% 떨어진 위치에 배치 */
+        left: 50%; /* 화면 왼쪽으로부터 50% 떨어진 위치에 배치 */
+        transform: translate(-50%, -50%); /* 수직 및 수평으로 50%만큼 이동하여 정중앙으로 배치 */
+        z-index: 9999; /* 다른 요소 위에 표시 */
+        display: none; /* 초기에는 숨김 */
         }
     </style>
 </head>
@@ -50,7 +65,13 @@
     <div id="reviewScreen"></div>
     <input type="file" id="csvFileInput" accept=".csv" style="display: none;"> <!-- CSV 파일 업로드를 위한 파일 입력(input) 요소 -->
     <script>
-
+        //vh 정리
+        let vh = window.innerHeight * 0.01
+        document.documentElement.style.setProperty('--vh', `${vh}px`)
+        window.addEventListener('resize', () => {
+            let vh = window.innerHeight * 0.01
+            document.documentElement.style.setProperty('--vh', `${vh}px`)
+        })
         // 버튼 및 폼 요소 가져오기
         const addStudentButton = document.getElementById('addStudentButton');
         const addStudentForm = document.getElementById('addStudentForm');
@@ -65,6 +86,7 @@
         const restartButton = document.createElement('button');
                 restartButton.textContent = '다시 하기';
                 restartButton.style.display = 'none'; // 초기에는 숨겨둠
+                restartButton.classList.add('restartButton');
                 document.body.appendChild(restartButton);
 
         // 다시 하기 버튼 클릭 시 이벤트 처리
@@ -119,6 +141,8 @@
             // "학생 추가" 버튼과 "CSV 파일로 카드 추가하기" 버튼 숨기기
             addStudentButton.style.display = 'none';
             uploadCSVButton.style.display = 'none';
+            //h1태그 숨기기
+            document.querySelector('h1').style.display = 'none';
             reviewScreen.innerHTML = ''; // 리뷰 화면 초기화
             shuffleCards(); // 카드 무작위 섞기
             currentCardIndex = 0; // 현재 카드 인덱스 초기화
@@ -150,7 +174,7 @@
                 question.classList.add('question');
                 const studentNumberSpan = document.createElement('span');
                 studentNumberSpan.textContent = `${currentCard.number}`;
-                const viewportWidth = window.innerWidth * 0.2; // 뷰포트 너비의 20%
+                const viewportWidth = window.innerWidth * 0.3; // 뷰포트 너비의 30%
                 studentNumberSpan.style.fontSize = `${viewportWidth}px`; // 학생 번호 크기를 설정합니다.
                 //question 가운데 정렬하기
                 question.classList.add('question');
@@ -187,8 +211,6 @@
         function showDifficultyButtons(currentCard) {
             const difficultyButtons = document.createElement('div');
             difficultyButtons.classList.add('difficulty-buttons');
-            difficultyButtons.style.display = 'flex'; // Flexbox 사용
-            difficultyButtons.style.justifyContent = 'center'; // 요소들을 가로로 가운데 정렬
             const difficulties = ['매우 쉬움', '쉬움', '어려움', '매우 어려움'];
             difficulties.forEach(difficulty => {
                 const button = document.createElement('button');
