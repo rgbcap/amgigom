@@ -215,6 +215,7 @@
             difficulties.forEach(difficulty => {
                 const button = document.createElement('button');
                 button.textContent = difficulty;
+                button.style.flex = '1'; // 버튼이 동일한 너비를 가지도록 flex 속성 설정
                 button.addEventListener('click', () => {
                     currentCard.difficulty = difficulty;
                     if (difficulty === '어려움' || difficulty === '매우 어려움') {
