@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>학생 이름 암기</title>
+    <title>암기곰</title>
     <style>
         /* 추가적인 CSS 스타일링은 여기에 작성하세요 */
         h1 {
@@ -170,14 +170,9 @@
                     reviewScreen.innerHTML = ''; // 리뷰 화면 초기화
                     const viewportWidth = window.innerWidth * 0.2; // 뷰포트 너비의 20%
                     answer.style.fontSize = `${viewportWidth}px`; // 학생 번호 크기를 설정합니다.
-                    reviewScreen.appendChild(answer);
                     showDifficultyButtons(currentCard);
+                    reviewScreen.appendChild(answer);
                     const style = document.createElement('style');
-                    style.textContent = `
-                        .difficulty-buttons {
-                            margin-top: 20px; // 상단에 20px의 간격 추가
-                        }
-                    `;
                     document.head.appendChild(style);
                 });
                 reviewScreen.appendChild(question);
