@@ -6,30 +6,44 @@
     <title>학생 이름 암기</title>
     <style>
         /* 추가적인 CSS 스타일링은 여기에 작성하세요 */
+        h1 {
+        text-align: center;
+        }
         #addStudentForm {
             display: none;
         }
         #reviewScreen {
             display: none;
         }
+        .button-container {
+        text-align: center;
+        }
+        .student-number {
+        display: flex;
+        justify-content: center; /* 수평 가운데 정렬 */
+        align-items: center; /* 수직 가운데 정렬 */
+        }
     </style>
 </head>
 <body>
-    <h1>학생 이름 암기</h1>
+    <h1>암기곰</h1>
     <div id="cardContainer">
         <!-- 카드가 동적으로 추가될 공간 -->
     </div>
+    <div class="button-container">
     <button id="addStudentButton">학생 추가</button>
     <form id="addStudentForm">
         <input type="text" id="studentNumber" placeholder="학생 번호">
         <input type="text" id="studentName" placeholder="학생 이름">
         <button type="submit">추가</button>
     </form>
-    <button id="uploadCSVButton">CSV 파일로 카드 추가하기</button>
-    <button id="saveCompleteButton">저장 완료</button>
+        <button id="uploadCSVButton">CSV 파일로 카드 추가하기</button>
+        <button id="saveCompleteButton">저장 완료</button>
+    </div>
     <div id="reviewScreen"></div>
     <input type="file" id="csvFileInput" accept=".csv" style="display: none;"> <!-- CSV 파일 업로드를 위한 파일 입력(input) 요소 -->
     <script>
+
         // 버튼 및 폼 요소 가져오기
         const addStudentButton = document.getElementById('addStudentButton');
         const addStudentForm = document.getElementById('addStudentForm');
@@ -52,13 +66,13 @@
                 currentCardIndex = 0;
                 reviewScreen.innerHTML = ''; // 리뷰 화면 초기화
                 shuffleCards(); // 카드 다시 섞기
-                showTotalCardsNumber(); // 총 카드 수 다시 표시
                 showCard(); // 카드 맞추기 활동 다시 시작
                 restartButton.style.display = 'none'; // "다시 하기" 버튼 숨기기
             });
         // 모든 맞추기 활동이 끝날 때 "다시 하기" 버튼을 표시하는 함수
         function showRestartButton() {
                     restartButton.style.display = 'block';
+                    restartButton.style.margin = '0 auto'; // 가운데 정렬을 위한 margin 설정
                 }
 
         // "csv 파일로 카드 추가하기" 버튼 클릭 시 이벤트 처리
@@ -101,7 +115,7 @@
             reviewScreen.innerHTML = ''; // 리뷰 화면 초기화
             shuffleCards(); // 카드 무작위 섞기
             currentCardIndex = 0; // 현재 카드 인덱스 초기화
-            showTotalCardsNumber(); // 총 카드 수 보여주기
+            // showTotalCardsNumber(); // 총 카드 수 보여주기
             showCard(); // 다음 카드 보여주기
             reviewScreen.style.display = 'block';
         });
@@ -124,21 +138,41 @@
         // 다음 카드 보여주는 함수
         function showCard() {
             if (currentCardIndex < students.length) {
+                saveCompleteButton.style.display = 'none'
                 const currentCard = students[currentCardIndex];
                 const question = document.createElement('div');
                 question.classList.add('question');
                 const studentNumberSpan = document.createElement('span');
                 studentNumberSpan.textContent = `${currentCard.number}`;
-                studentNumberSpan.style.fontSize = '5em'; // 학생 번호 크기를 5배로 설정
+                const viewportWidth = window.innerWidth * 0.2; // 뷰포트 너비의 80%
+                studentNumberSpan.style.fontSize = `${viewportWidth}px`; // 학생 번호 크기를 설정합니다.
+                //question 가운데 정렬하기
+                question.classList.add('question');
+                question.style.display = 'flex'; // Flexbox 사용
+                question.style.flexDirection = 'column'; // 요소들을 세로로 정렬
+                question.style.alignItems = 'center'; // 요소들을 가운데 정렬
                 question.appendChild(studentNumberSpan);
-                question.innerHTML += ` / ${currentCardIndex + 1} / ${students.length}`; // 현재 카드 순서와 총 카드 수 표시
+                question.appendChild(document.createElement('br')); // 빈 줄 삽입
+                question.innerHTML += ` ${currentCardIndex + 1} / ${students.length}`; // 현재 카드 순서와 총 카드 수 표시
                 question.addEventListener('click', () => {
                     const answer = document.createElement('div');
+                    //answer 가운데 정렬하기
+                    answer.classList.add('answer');
+                    answer.style.display = 'flex'; // Flexbox 사용
+                    answer.style.flexDirection = 'column'; // 요소들을 세로로 정렬
+                    answer.style.alignItems = 'center'; // 요소들을 가운데 정렬
                     answer.classList.add('answer');
                     answer.textContent = currentCard.name;
                     reviewScreen.innerHTML = ''; // 리뷰 화면 초기화
                     reviewScreen.appendChild(answer);
                     showDifficultyButtons(currentCard);
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        .difficulty-buttons {
+                            margin-top: 20px; // 상단에 20px의 간격 추가
+                        }
+                    `;
+                    document.head.appendChild(style);
                 });
                 reviewScreen.appendChild(question);
                 currentCardIndex++;
@@ -152,6 +186,8 @@
         function showDifficultyButtons(currentCard) {
             const difficultyButtons = document.createElement('div');
             difficultyButtons.classList.add('difficulty-buttons');
+            difficultyButtons.style.display = 'flex'; // Flexbox 사용
+            difficultyButtons.style.justifyContent = 'center'; // 요소들을 가로로 가운데 정렬
             const difficulties = ['매우 쉬움', '쉬움', '어려움', '매우 어려움'];
             difficulties.forEach(difficulty => {
                 const button = document.createElement('button');
