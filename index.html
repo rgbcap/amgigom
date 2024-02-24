@@ -144,13 +144,14 @@
                 question.classList.add('question');
                 const studentNumberSpan = document.createElement('span');
                 studentNumberSpan.textContent = `${currentCard.number}`;
-                const viewportWidth = window.innerWidth * 0.2; // 뷰포트 너비의 80%
+                const viewportWidth = window.innerWidth * 0.2; // 뷰포트 너비의 20%
                 studentNumberSpan.style.fontSize = `${viewportWidth}px`; // 학생 번호 크기를 설정합니다.
                 //question 가운데 정렬하기
                 question.classList.add('question');
                 question.style.display = 'flex'; // Flexbox 사용
                 question.style.flexDirection = 'column'; // 요소들을 세로로 정렬
                 question.style.alignItems = 'center'; // 요소들을 가운데 정렬
+                question.style.height = '100vh'; // 뷰포트 높이의 100%
                 question.appendChild(studentNumberSpan);
                 question.appendChild(document.createElement('br')); // 빈 줄 삽입
                 question.innerHTML += ` ${currentCardIndex + 1} / ${students.length}`; // 현재 카드 순서와 총 카드 수 표시
@@ -161,9 +162,10 @@
                     answer.style.display = 'flex'; // Flexbox 사용
                     answer.style.flexDirection = 'column'; // 요소들을 세로로 정렬
                     answer.style.alignItems = 'center'; // 요소들을 가운데 정렬
-                    answer.classList.add('answer');
                     answer.textContent = currentCard.name;
                     reviewScreen.innerHTML = ''; // 리뷰 화면 초기화
+                    const viewportWidth = window.innerWidth * 0.2; // 뷰포트 너비의 20%
+                    answer.style.fontSize = `${viewportWidth}px`; // 학생 번호 크기를 설정합니다.
                     reviewScreen.appendChild(answer);
                     showDifficultyButtons(currentCard);
                     const style = document.createElement('style');
