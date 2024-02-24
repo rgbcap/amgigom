@@ -162,6 +162,7 @@
                     answer.style.display = 'flex'; // Flexbox 사용
                     answer.style.flexDirection = 'column'; // 요소들을 세로로 정렬
                     answer.style.alignItems = 'center'; // 요소들을 가운데 정렬
+                    answer.style.height = '100vh'; // 뷰포트 높이의 100%
                     answer.textContent = currentCard.name;
                     reviewScreen.innerHTML = ''; // 리뷰 화면 초기화
                     const viewportWidth = window.innerWidth * 0.2; // 뷰포트 너비의 20%
