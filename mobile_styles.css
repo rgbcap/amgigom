@@ -6,10 +6,11 @@ h1 {
     display: none;
 }
 button {
+    white-space: pre-line; /* 텍스트에 줄바꿈 적용 */
     display: inline-block;
     width: 12vw; /* 뷰포트 너비의 12% */
     height: 8vh;
-    font-size: 0.92vh;
+    font-size: 0.90vh;
 }
 .button-container {
     text-align: center;
@@ -33,6 +34,7 @@ button {
     bottom: 10px; /* 화면 하단으로부터의 간격 조절 */
     left: 50%;
     transform: translateX(-50%);
+    white-space: normal;
 }
 .restartButton {
     position: fixed; /* 화면의 고정 위치에 배치 */

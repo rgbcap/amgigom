@@ -33,6 +33,7 @@ button {
     bottom: 10px; /* 화면 하단으로부터의 간격 조절 */
     left: 50%;
     transform: translateX(-50%);
+    white-space: normal;
 }
 .restartButton {
     position: fixed; /* 화면의 고정 위치에 배치 */
