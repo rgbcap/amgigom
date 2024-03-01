@@ -30,6 +30,7 @@ restartButton.addEventListener('click', () => {
     students = [...firststudents];
     currentCardIndex = 0; //현재 카드 인덱스 
     restartButton.style.display = 'none'; // "다시 하기" 버튼 숨기기
+    shuffleCards(); // 카드 무작위 섞기
     // 다음 카드 보여주기
     showCard();
 });
