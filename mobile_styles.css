@@ -10,7 +10,7 @@ button {
     display: inline-block;
     width: 12vw; /* 뷰포트 너비의 12% */
     height: 8vh;
-    font-size: 0.90vh;
+    font-size: 0.89vh;
 }
 .button-container {
     text-align: center;
