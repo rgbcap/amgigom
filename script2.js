@@ -14,31 +14,30 @@ const csvFileInput = document.getElementById('csvFileInput');
 
 // 데이터베이스에 저장될 카드 데이터 배열
 let students = [];
-let firststudents = []; // 처음 저장된 카드 데이터 배열
 
 // 다시 하기 버튼 생성
 const restartButton = document.createElement('button');
-restartButton.textContent = '다시 하기';
-restartButton.style.display = 'none'; // 초기에는 숨겨둠
-restartButton.classList.add('restartButton');
-document.body.appendChild(restartButton);
+        restartButton.textContent = '다시 하기';
+        restartButton.style.display = 'none'; // 초기에는 숨겨둠
+        restartButton.classList.add('restartButton');
+        document.body.appendChild(restartButton);
 
 // 다시 하기 버튼 클릭 시 이벤트 처리
 restartButton.addEventListener('click', () => {
-    reviewScreen.innerHTML = ''; // 리뷰 화면 초기화
-    // students 배열을 처음 저장된 상태로 되돌림
-    students = [...firststudents];
-    currentCardIndex = 0; //현재 카드 인덱스 
-    restartButton.style.display = 'none'; // "다시 하기" 버튼 숨기기
-    // 다음 카드 보여주기
-    showCard();
+        // 카드 맞추기 활동 관련 요소들 초기화
+        currentCardIndex = 0;
+        reviewScreen.innerHTML = ''; // 리뷰 화면 초기화
+        //students 배열 초기화
+        students = firststudents;
+        shuffleCards(); // 카드 다시 섞기
+        showCard(); // 카드 맞추기 활동 다시 시작
+        restartButton.style.display = 'none'; // "다시 하기" 버튼 숨기기
 });
-
 // 모든 맞추기 활동이 끝날 때 "다시 하기" 버튼을 표시하는 함수
 function showRestartButton() {
-    restartButton.style.display = 'block';
-    restartButton.style.margin = '0 auto'; // 가운데 정렬을 위한 margin 설정
-}
+            restartButton.style.display = 'block';
+            restartButton.style.margin = '0 auto'; // 가운데 정렬을 위한 margin 설정
+        }
 
 // "csv 파일로 카드 추가하기" 버튼 클릭 시 이벤트 처리
 document.getElementById('uploadCSVButton').addEventListener('click', () => {
@@ -70,9 +69,8 @@ function processCSV(contents) {
         }
     });
     alert('CSV 파일이 성공적으로 추가되었습니다.'); // 성공적으로 추가된 경우 알림
-    // CSV 파일을 처음 저장된 카드 데이터로 설정
-    firststudents = [...students];
 }
+
 
 // 저장 완료 버튼 클릭 시 이벤트 처리
 saveCompleteButton.addEventListener('click', () => {
@@ -80,6 +78,8 @@ saveCompleteButton.addEventListener('click', () => {
     addCardButton.style.display = 'none';
     addCardForm.style.display = 'none';
     uploadCSVButton.style.display = 'none';
+    // students 배열 저장하기
+    firststudents = students;
     //h1태그 숨기기
     document.querySelector('h1').style.display = 'none';
     reviewScreen.innerHTML = ''; // 리뷰 화면 초기화
@@ -87,8 +87,6 @@ saveCompleteButton.addEventListener('click', () => {
     currentCardIndex = 0; // 현재 카드 인덱스 초기화
     showCard(); // 다음 카드 보여주기
     reviewScreen.style.display = 'block';
-    // "저장 완료" 시점의 카드 데이터를 처음 저장된 상태로 설정
-    firststudents = [...students];
 });
 
 // 총 카드 수 보여주는 함수
@@ -108,9 +106,8 @@ function shuffleCards() {
 
 // 다음 카드 보여주는 함수
 function showCard() {
-    // 카드 데이터가 남아있는 경우에만 실행
     if (currentCardIndex < students.length) {
-        saveCompleteButton.style.display = 'none';
+        saveCompleteButton.style.display = 'none'
         const currentCard = students[currentCardIndex];
         const question = document.createElement('div');
         question.classList.add('question');

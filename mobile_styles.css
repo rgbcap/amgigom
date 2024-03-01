@@ -8,9 +8,8 @@ h1 {
 button {
     white-space: pre-line; /* 텍스트에 줄바꿈 적용 */
     display: inline-block;
-    width: 12vw; /* 뷰포트 너비의 12% */
     height: 8vh;
-    font-size: 0.89vh;
+    font-size: 3vh;
 }
 .button-container {
     text-align: center;
@@ -34,7 +33,15 @@ button {
     bottom: 10px; /* 화면 하단으로부터의 간격 조절 */
     left: 50%;
     transform: translateX(-50%);
-    white-space: normal;
+    word-wrap: break-word;
+}
+.difficulty-buttons button {
+    width: 60vw; /* 버튼의 너비를 viewpoint의 60%로 설정 */
+    height: 6vh; /* 높이를 viewpoint 높이의 6%로 설정 */
+    display: flex;
+    justify-content: center; /* 텍스트를 가로 방향으로 가운데 정렬합니다. */
+    align-items: center; /* 텍스트를 세로 방향으로 가운데 정렬합니다. */
+    margin-bottom: 0.5em; /* 버튼 간의 간격을 조정합니다. */
 }
 .restartButton {
     position: fixed; /* 화면의 고정 위치에 배치 */

@@ -16,6 +16,7 @@ button {
     width: 100%; /*부모 요소 가로 너비를 100%로 설정*/
 }
 .question, .answer {
+    font-size: 20pt;
     display: flex;
     justify-content: center;
     align-items: center;
