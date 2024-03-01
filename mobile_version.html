@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQJ6JR5XTH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-ZQJ6JR5XTH');
+    </script>
+    <title>암기곰</title>
+    <link rel="stylesheet" href="mobile_styles.css">
+</head>
+<body>
+    <h1>암기곰</h1>
+    <div class="button-container">
+        <button id="addCardButton">카드 추가</button>
+        <form id="addCardForm" style="display: none;">
+            <input type="text" id="studentNumber" placeholder="카드 문제">
+            <input type="text" id="studentName" placeholder="카드 정답">
+            <button type="submit">추가</button>
+        </form>
+        <button id="uploadCSVButton">CSV 파일 추가</button>
+        <button id="saveCompleteButton">저장 완료</button>
+    </div>
+    <div id="reviewScreen"></div>
+    <input type="file" id="csvFileInput" accept=".csv" style="display: none;"> <!-- CSV 파일 업로드를 위한 파일 입력(input) 요소 -->
+    <script src="script.js"></script> <!-- 외부 Javascript 파일 연결-->
+</body>
+<!-- <footer>
+	<iframe src="https://ads-partners.coupang.com/widgets.html?id=761140&template=carousel&trackingCode=AF6363303&subId=&width=680&height=140&tsource=" width="680" height="140" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>
+	<iframe align="center" src="https://coupa.ng/ce5fys" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>
+<p align="center"> "이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다."</p>
+</footer> -->
+</html>
