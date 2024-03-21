@@ -37,23 +37,23 @@ restartButton.addEventListener('click', () => {
 
 // question과 answer 요소에 대해 글자 크기를 동적으로 조절하는 함수
 function adjustFontSize() {
-const question = document.querySelector('.question');
-const answer = document.querySelector('.answer');
+    const question = document.querySelector('.question');
+    const answer = document.querySelector('.answer');
 
 // 현재 문제와 답의 글자 수 가져오기
-const questionLength = question.textContent.length;
-const answerLength = answer.textContent.length;
+    const questionLength = question.textContent.length;
+    const answerLength = answer.textContent.length;
 
 // 뷰포트의 너비를 기준으로 폰트 크기 설정
-const viewportWidth = window.innerWidth;
+    const viewportWidth = window.innerWidth;
 
 // 폰트 크기를 조절할 비율을 설정
-const questionFontSizeRatio = Math.min(viewportWidth * 0.05, 24) / questionLength;
-const answerFontSizeRatio = Math.min(viewportWidth * 0.05, 24) / answerLength;
+    const questionFontSizeRatio = Math.min(viewportWidth * 0.05, 24) / questionLength;
+    const answerFontSizeRatio = Math.min(viewportWidth * 0.05, 24) / answerLength;
 
 // 폰트 크기를 적용
-question.style.fontSize = `${questionFontSizeRatio}px`;
-answer.style.fontSize = `${answerFontSizeRatio}px`;
+    question.style.fontSize = `${questionFontSizeRatio}px`;
+    answer.style.fontSize = `${answerFontSizeRatio}px`;
 }
 
 // 초기화 시 폰트 크기 조절 함수를 호출하여 실행
