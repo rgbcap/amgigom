@@ -1,79 +1,179 @@
- /* 추가적인 CSS 스타일링은 여기에 작성하세요 */
-h1 {
+body {
+    font-family: Arial, sans-serif;
     text-align: center;
+    margin: 20px;
 }
+
+.button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+#cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.flip-card {
+    background-color: transparent;
+    width: 200px;
+    height: 300px;
+    perspective: 1000px;
+    margin: 10px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.flip-card-front {
+    background-color: #bbb;
+    color: black;
+}
+
+.flip-card-front img {
+    max-width: 100%;
+    max-height: 80%;
+}
+
+.flip-card-back {
+    background-color: #2980b9;
+    color: white;
+    transform: rotateY(180deg);
+}
+
+#status {
+    margin-top: 20px;
+    color: red;
+}
+
 #reviewScreen {
-    display: none;
+    margin-top: 20px;
 }
-button {
-    white-space: pre-line; /* 텍스트에 줄바꿈 적용 */
-    display: inline-block;
-    height: 8vh;
-    font-size: 3vh;
-}
-.button-container {
-    text-align: center;
-    width: 100%; /*부모 요소 가로 너비를 100%로 설정*/
-}
+
 .question, .answer {
+    white-space: pre-line;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+.question img {
+    object-fit: none; /* 이미지 비율 무시, 확대 시 깨짐 허용 */
+}
+
+.question span {
+    font-size: 5rem; /* 기본 폰트 크기 */
+}
+
+.card-counter {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.difficulty-buttons {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    height: calc(var(--vh, 1vh) * 100); /* 브라우저의 높이를 차지하도록 설정 */
+    gap: 10px;
+    margin-top: 20px;
 }
-.card-counter {
-    position: fixed;
-    bottom: 10px; /* 화면 하단으로부터의 간격 조절 */
-    left: 50%;
-    transform: translateX(-50%);
-}
-.difficulty-buttons {
-    position: fixed;
-    bottom: 10px; /* 화면 하단으로부터의 간격 조절 */
-    left: 50%;
-    transform: translateX(-50%);
-    word-wrap: break-word;
-}
+
 .difficulty-buttons button {
-    width: 60vw; /* 버튼의 너비를 viewpoint의 60%로 설정 */
-    height: 6vh; /* 높이를 viewpoint 높이의 6%로 설정 */
-    display: flex;
-    justify-content: center; /* 텍스트를 가로 방향으로 가운데 정렬합니다. */
-    align-items: center; /* 텍스트를 세로 방향으로 가운데 정렬합니다. */
-    margin-bottom: 0.5em; /* 버튼 간의 간격을 조정합니다. */
+    flex: 1;
+    max-width: 150px;
+    padding: 10px;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
-.restartButton {
-    position: fixed; /* 화면의 고정 위치에 배치 */
-    top: 50%; /* 화면 상단으로부터 50% 떨어진 위치에 배치 */
-    left: 50%; /* 화면 왼쪽으로부터 50% 떨어진 위치에 배치 */
-    transform: translate(-50%, -50%); /* 수직 및 수평으로 50%만큼 이동하여 정중앙으로 배치 */
-    z-index: 9999; /* 다른 요소 위에 표시 */
-    display: none; /* 초기에는 숨김 */
-    }
-/* 매우 어려움 버튼 */
+
 .difficulty-buttons button:nth-child(1) {
-    background-color: #FFb9B3; /* 배경색을 녹색으로 지정 */
-    color: black; /* 글자색을 흰색으로 지정 */
+    background-color: #dc3545; /* 매우 어려움: 짙은 붉은색 */
 }
 
-/* 어려움 버튼 */
+.difficulty-buttons button:nth-child(1):hover {
+    background-color: #c82333; /* 호버: 더 어두운 붉은색 */
+}
+
 .difficulty-buttons button:nth-child(2) {
-    background-color: #FFD5B8; /* 배경색을 파란색으로 지정 */
-    color: black; /* 글자색을 흰색으로 지정 */
+    background-color: #ff6b6b; /* 어려움: 밝은 붉은색 */
 }
 
-/* 쉬움 버튼 */
+.difficulty-buttons button:nth-child(2):hover {
+    background-color: #ff4c4c; /* 호버: 약간 더 어두운 붉은색 */
+}
+
 .difficulty-buttons button:nth-child(3) {
-    background-color: #FFF9AA; /* 배경색을 주황색으로 지정 */
-    color: black; /* 글자색을 흰색으로 지정 */
+    background-color: #28a745; /* 쉬움: 표준 초록색 */
 }
 
-/* 매우 쉬움 버튼 */
-.difficulty-buttons button:nth-child(4) {
-    background-color: #ACECD5; /* 배경색을 빨간색으로 지정 */
-    color: black; /* 글자색을 흰색으로 지정 */
+.difficulty-buttons button:nth-child(3):hover {
+    background-color: #218838; /* 호버: 약간 더 어두운 초록색 */
 }
-#addCardForm {
-    display: none; /*초기에는 숨김*/
+
+.difficulty-buttons button:nth-child(4) {
+    background-color: #218838; /* 매우 쉬움: 짙은 초록색 */
+}
+
+.difficulty-buttons button:nth-child(4):hover {
+    background-color: #1c6f2f; /* 호버: 더 어두운 초록색 */
+}
+
+.restartButton {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px auto;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: none;
+}
+
+.restartButton:hover {
+    background-color: #c82333;
+}
+
+form {
+    margin: 20px;
+}
+
+form input {
+    margin: 5px;
+    padding: 5px;
+    font-size: 14px;
 }
