@@ -65,8 +65,11 @@
     <button class="button" id="uploadCSVButton">CSV 파일로 카드 추가</button>
     <input type="file" id="csvFileInput" accept=".csv" style="display: none;">
 
-    <button class="button" id="uploadExcelButton">Excel 파일 추가</button>
-    <input type="file" id="excelInput" accept=".xlsx" style="display: none;">
+    <div class="upload-section">
+        <button class="button" id="uploadExcelButton">Excel 파일 선택</button>
+        <input type="file" id="excelInput" accept=".xlsx,.xls" style="margin: 10px;">
+        <div id="dropArea" class="drop-area">여기에 Excel 파일을 드래그하여 놓으세요</div>
+    </div>
 
     <button class="button" id="saveCompleteButton">저장 완료</button>
 
