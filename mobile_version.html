@@ -1,42 +1,79 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQJ6JR5XTH"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-    
-      gtag('config', 'G-ZQJ6JR5XTH');
-    </script>
     <title>암기곰</title>
-    <link rel="stylesheet" href="mobile_styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <!-- CDN 라이브러리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- 로컬 라이브러리 (인터넷 연결 문제 시 주석 해제)
+    <script src="./xlsx.full.min.js"></script>
+    <script src="./jszip.min.js"></script>
+    -->
 </head>
 <body>
     <h1>암기곰</h1>
-    <div class="button-container">
-        <button id="addCardButton">카드
-            추가</button>
-        <form id="addCardForm" style="display: none;">
-            <input type="text" id="studentNumber" placeholder="카드 문제">
-            <input type="text" id="studentName" placeholder="카드 정답">
-            <button type="submit">추가</button>
-        </form>
-        <button id="uploadCSVButton">CSV파일
-            추가</button>
-        <button id="saveCompleteButton">저장
-            완료</button>
-    </div>
+
+    <button class="button" id="addCardButton">카드 추가</button>
+    <form id="addCardForm" style="display: none;">
+        <input type="text" id="studentNumber" placeholder="학생 번호" required>
+        <input type="text" id="studentName" placeholder="학생 이름" required>
+        <button type="submit" class="button">추가</button>
+    </form>
+
+    <button class="button" id="uploadCSVButton">CSV 파일로 카드 추가</button>
+    <input type="file" id="csvFileInput" accept=".csv" style="display: none;">
+
+    <button class="button" id="uploadExcelButton">Excel 파일 추가</button>
+    <input type="file" id="excelInput" accept=".xlsx" style="display: none;">
+
+    <button class="button" id="saveCompleteButton">저장 완료</button>
+
+    <div id="cardContainer"></div>
     <div id="reviewScreen"></div>
-    <input type="file" id="csvFileInput" accept=".csv" style="display: none;"> <!-- CSV 파일 업로드를 위한 파일 입력(input) 요소 -->
-    <script src="script.js"></script> <!-- 외부 Javascript 파일 연결-->
+    <div id="status"></div>
+
+    <script defer src="script.js"></script>
 </body>
-<!-- <footer>
-	<iframe src="https://ads-partners.coupang.com/widgets.html?id=761140&template=carousel&trackingCode=AF6363303&subId=&width=680&height=140&tsource=" width="680" height="140" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>
-	<iframe align="center" src="https://coupa.ng/ce5fys" width="120" height="240" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>
-<p align="center"> "이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다."</p>
-</footer> -->
 </html>
