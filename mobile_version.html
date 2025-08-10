@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>암기곰</title>
-    <link rel="stylesheet" href="mobile_styles.css">
-    <!-- CDN 라이브러리 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <!-- 로컬 라이브러리 (인터넷 연결 문제 시 주석 해제)
-    <script src="./xlsx.full.min.js"></script>
-    <script src="./jszip.min.js"></script>
-    -->
-    <script type="text/javascript">
+<script type="text/javascript">
         var gk_isXlsx = false;
         var gk_xlsxFileLookup = {};
         var gk_fileData = {};
@@ -51,7 +37,20 @@
         }
         return gk_fileData[filename] || "";
         }
-        </script>
+        </script><!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>암기곰</title>
+    <link rel="stylesheet" href="mobile_styles.css">
+    <!-- CDN 라이브러리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- 로컬 라이브러리 (인터넷 연결 문제 시 주석 해제)
+    <script src="./xlsx.full.min.js"></script>
+    <script src="./jszip.min.js"></script>
+    -->
 </head>
 <body>
     <h1>암기곰</h1>
@@ -63,13 +62,13 @@
         <button type="submit" class="button">추가</button>
     </form>
 
-    <button class="button" id="uploadCSVButton">CSV 파일로 카드 추가</button>
-    <input type="file" id="csvFileInput" accept=".csv" style="display: none;">
+    <!-- <button class="button" id="uploadCSVButton">CSV 파일로 카드 추가</button>
+    <input type="file" id="csvFileInput" accept=".csv" style="display: none;"> -->
 
     <div class="upload-section">
         <button class="button" id="uploadExcelButton">Excel 파일 선택</button>
-        <input type="file" id="excelInput" accept=".xlsx,.xls" style="margin: 10px;"><!--
-        <div id="dropArea" class="drop-area">여기에 Excel 파일을 드래그하여 놓으세요</div> -->
+        <input type="file" id="excelInput" accept=".xlsx,.xls" style="margin: 10px;">
+        <!--<div id="dropArea" class="drop-area">여기에 Excel 파일을 드래그하여 놓으세요</div> -->
     </div>
 
     <button class="button" id="saveCompleteButton">저장 완료</button>
