@@ -26,9 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const addCardForm = document.getElementById('addCardForm');
     const saveCompleteButton = document.getElementById('saveCompleteButton');
     const reviewScreen = document.getElementById('reviewScreen');
-    const csvFileInput = document.getElementById('csvFileInput');
-    const uploadCSVButton = document.getElementById('uploadCSVButton');
-    const uploadExcelButton = document.getElementById('uploadExcelButton');
+    // const csvFileInput = document.getElementById('csvFileInput');
+    // const uploadCSVButton = document.getElementById('uploadCSVButton');
+    // const uploadExcelButton = document.getElementById('uploadExcelButton');
     const excelInput = document.getElementById('excelInput');
     const status = document.getElementById('status');
     const cardContainer = document.getElementById('cardContainer');
@@ -197,43 +197,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // CSV 파일 업로드 처리
-    uploadCSVButton.addEventListener('click', () => {
-        console.log('CSV 파일 추가 버튼 클릭');
-        csvFileInput.click();
-    });
+    // uploadCSVButton.addEventListener('click', () => {
+    //     console.log('CSV 파일 추가 버튼 클릭');
+    //     csvFileInput.click();
+    // });
 
-    csvFileInput.addEventListener('change', handleFileUpload);
+    // csvFileInput.addEventListener('change', handleFileUpload);
 
-    function handleFileUpload(event) {
-        console.log('CSV 파일 선택됨');
-        const file = event.target.files[0];
-        if (!file) {
-            console.log('파일 선택 안됨');
-            status.textContent = '오류: 파일이 선택되지 않았습니다.';
-            status.style.color = 'red';
-            return;
-        }
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            console.log('CSV 파일 읽기 완료');
-            const contents = e.target.result;
-            processCSV(contents);
-        };
-        reader.readAsText(file, 'UTF-8');
-    }
+    // function handleFileUpload(event) {
+    //     console.log('CSV 파일 선택됨');
+    //     const file = event.target.files[0];
+    //     if (!file) {
+    //         console.log('파일 선택 안됨');
+    //         status.textContent = '오류: 파일이 선택되지 않았습니다.';
+    //         status.style.color = 'red';
+    //         return;
+    //     }
+    //     const reader = new FileReader();
+    //     reader.onload = function(e) {
+    //         console.log('CSV 파일 읽기 완료');
+    //         const contents = e.target.result;
+    //         processCSV(contents);
+    //     };
+    //     reader.readAsText(file, 'UTF-8');
+    // }
 
-    function processCSV(contents) {
-        const lines = contents.split('\n');
-        lines.forEach(line => {
-            const [number, name] = line.trim().split(',');
-            if (number && name) {
-                cards.push({ number: number.trim(), name: name.trim(), photo: null });
-            }
-        });
-        alert('CSV 파일이 성공적으로 추가되었습니다.');
-        firstCards = [...cards];
-        displayCards();
-    }
+    // function processCSV(contents) {
+    //     const lines = contents.split('\n');
+    //     lines.forEach(line => {
+    //         const [number, name] = line.trim().split(',');
+    //         if (number && name) {
+    //             cards.push({ number: number.trim(), name: name.trim(), photo: null });
+    //         }
+    //     });
+    //     alert('CSV 파일이 성공적으로 추가되었습니다.');
+    //     firstCards = [...cards];
+    //     displayCards();
+    // }
 
     // 카드 추가 폼 처리
     addCardButton.addEventListener('click', () => {
@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('저장 완료 버튼 클릭');
         addCardButton.style.display = 'none';
         addCardForm.style.display = 'none';
-        uploadCSVButton.style.display = 'none';
+        // uploadCSVButton.style.display = 'none';
         uploadExcelButton.style.display = 'none';
         excelInput.style.display = 'none';
         document.querySelector('h1').style.display = 'none';
