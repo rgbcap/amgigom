@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const excelInput = document.getElementById('excelInput');
     const status = document.getElementById('status');
     const cardContainer = document.getElementById('cardContainer');
-    const dropArea = document.getElementById('dropArea');
 
     // 요소 확인
     if (!cardContainer) {
@@ -40,8 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (status) status.textContent = '오류: cardContainer 요소를 찾을 수 없습니다. HTML을 확인하세요.';
         return;
     }
-    if (!uploadExcelButton || !excelInput || !dropArea) {
-        console.error('uploadExcelButton, excelInput 또는 dropArea 요소를 찾을 수 없습니다.');
+    if (!uploadExcelButton || !excelInput ) {
+        console.error('uploadExcelButton, excelInput 요소를 찾을 수 없습니다.');
         if (status) status.textContent = '오류: 버튼, 파일 입력 또는 드롭 영역 요소를 찾을 수 없습니다.';
         return;
     }
@@ -75,30 +74,30 @@ document.addEventListener('DOMContentLoaded', () => {
         excelInput.click();
     });
 
-    // 드래그 앤 드롭 이벤트
-    dropArea.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dropArea.classList.add('dragover');
-        console.log('드래그 오버');
-    });
+    // // 드래그 앤 드롭 이벤트
+    // dropArea.addEventListener('dragover', (e) => {
+    //     e.preventDefault();
+    //     dropArea.classList.add('dragover');
+    //     console.log('드래그 오버');
+    // });
 
-    dropArea.addEventListener('dragleave', () => {
-        dropArea.classList.remove('dragover');
-        console.log('드래그 리브');
-    });
+    // dropArea.addEventListener('dragleave', () => {
+    //     dropArea.classList.remove('dragover');
+    //     console.log('드래그 리브');
+    // });
 
-    dropArea.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropArea.classList.remove('dragover');
-        console.log('파일 드롭');
-        const file = e.dataTransfer.files[0];
-        if (file && (file.name.endsWith('.xlsx') || file.name.endsWith('.xls'))) {
-            processExcelFile(file);
-        } else {
-            status.textContent = '오류: .xlsx 또는 .xls 파일을 드롭하세요.';
-            status.style.color = 'red';
-        }
-    });
+    // dropArea.addEventListener('drop', (e) => {
+    //     e.preventDefault();
+    //     dropArea.classList.remove('dragover');
+    //     console.log('파일 드롭');
+    //     const file = e.dataTransfer.files[0];
+    //     if (file && (file.name.endsWith('.xlsx') || file.name.endsWith('.xls'))) {
+    //         processExcelFile(file);
+    //     } else {
+    //         status.textContent = '오류: .xlsx 또는 .xls 파일을 드롭하세요.';
+    //         status.style.color = 'red';
+    //     }
+    // });
 
     // Excel 파일 업로드 처리
     excelInput.addEventListener('change', async (e) => {
@@ -261,6 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
         addCardForm.style.display = 'none';
         uploadCSVButton.style.display = 'none';
         uploadExcelButton.style.display = 'none';
+        excelInput.style.display = 'none';
         document.querySelector('h1').style.display = 'none';
         cardContainer.innerHTML = ''; // 플립 카드 제거
         reviewScreen.innerHTML = '';
